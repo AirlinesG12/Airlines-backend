@@ -23,6 +23,7 @@ public class Ticket {
 	String destination;
 	double fare;
 	long seatNumber;
+	String ticketStatus;
 	
 	@OneToOne
 	@JoinColumn(name = "passangerId")

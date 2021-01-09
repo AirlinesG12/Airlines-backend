@@ -1,6 +1,7 @@
 package com.lti.entity;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,6 +28,7 @@ public class Flight {
 	String destination;
 	long noOfSeats;
 	LocalDate departureDate;
+	LocalTime departureTime;
 	
 	/*@OneToOne(mappedBy = "flight")
 	Bookings bookings;*/
