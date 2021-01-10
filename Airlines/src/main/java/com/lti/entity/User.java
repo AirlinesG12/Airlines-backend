@@ -1,6 +1,8 @@
 package com.lti.entity;
 
 import java.time.LocalDate;
+
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,27 +15,32 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tbl_user")
 public class User {
 
 	@Id
-	@SequenceGenerator(name = "seq_user",initialValue = 10001,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_user")
+	@SequenceGenerator(name = "seq_user", initialValue = 10001, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user")
 	long userId;
-	String userName;
+
 	String firstName;
 	String lastName;
 	String userPassword;
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	LocalDate userDateOfBirth;
 	String userEmail;
-	String userModile;
-	
-	/*@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-	List<Bookings>booking;*/
-	
-	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	List<Bookings>bookings;
+	String userMobile;
+
+	/*
+	 * @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	 * List<Bookings>booking;
+	 */
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	List<Bookings> bookings;
 
 	public long getUserId() {
 		return userId;
@@ -42,14 +49,14 @@ public class User {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+//
+//	public String getUserName() {
+//		return userName;
+//	}
+//
+//	public void setUserName(String userName) {
+//		this.userName = userName;
+//	}
 
 	public String getFirstName() {
 		return firstName;
@@ -91,17 +98,13 @@ public class User {
 		this.userEmail = userEmail;
 	}
 
-	public String getUserModile() {
-		return userModile;
+	public String getUserMobile() {
+		return userMobile;
 	}
 
-	public void setUserModile(String userModile) {
-		this.userModile = userModile;
+	public void setUserModile(String userMobile) {
+		this.userMobile = userMobile;
 	}
-
-	
-
-	
 
 	public List<Bookings> getBookings() {
 		return bookings;
@@ -113,11 +116,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", userPassword=" + userPassword + ", userDateOfBirth=" + userDateOfBirth + ", userEmail="
-				+ userEmail + ", userModile=" + userModile + "]";
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userPassword="
+				+ userPassword + ", userDateOfBirth=" + userDateOfBirth + ", userEmail=" + userEmail + ", userModile="
+				+ userMobile + "]";
 	}
-	
-	
-	
+
 }
