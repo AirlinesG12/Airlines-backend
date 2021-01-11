@@ -16,8 +16,8 @@ public class AdminRepositoryImpl implements AdminRepository {
 	EntityManager em;
 	
 	@Transactional
-	public long addAFlight(Flight flight) {
-		return em.merge(flight).getFlightId();
+	public Flight addAFlight(Flight flight) {
+		return em.merge(flight);
 	}
 	
 	@Transactional
