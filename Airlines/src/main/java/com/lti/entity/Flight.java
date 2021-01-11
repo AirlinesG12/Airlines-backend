@@ -16,8 +16,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "tbl_flight")
+@Table(name = "tbl_flight3")
 public class Flight {
 
 	@Id
@@ -39,6 +41,7 @@ public class Flight {
 	Admin admin;*/
 	
 	@OneToMany(mappedBy = "flight")
+	@JsonIgnore
 	List<Ticket> tickets;
 
 	public long getFlightId() {
@@ -80,6 +83,8 @@ public class Flight {
 	public void setDepartureDate(LocalDate departureDate) {
 		this.departureDate = departureDate;
 	}
+	
+	
 
 	/*public Bookings getBookings() {
 		return bookings;
@@ -99,10 +104,18 @@ public class Flight {
 
 	
 	
+	public LocalTime getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(LocalTime departureTime) {
+		this.departureTime = departureTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Flight [flightId=" + flightId + ", source=" + source + ", destination=" + destination + ", noOfSeats="
-				+ noOfSeats + ", departureDate=" + departureDate + "]";
+				+ noOfSeats + ", departureDate=" + departureDate + ", departureTime=" + departureTime + "]";
 	}
 
 	public List<Ticket> getTickets() {
