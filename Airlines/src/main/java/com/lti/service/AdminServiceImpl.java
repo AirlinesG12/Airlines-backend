@@ -11,7 +11,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	AdminRepository adminRepository;
-	public long addAFlight(Flight flight) {
+	public Flight addAFlight(Flight flight) {
 		
 		return adminRepository.addAFlight(flight);
 	}
