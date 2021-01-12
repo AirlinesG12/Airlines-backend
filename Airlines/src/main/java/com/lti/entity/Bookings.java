@@ -30,10 +30,12 @@ public class Bookings {
 	double totalFare;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="userId")
 	User user;
 	
 	@OneToMany(mappedBy = "bookings",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JsonIgnore
 	List<Passanger>passanger;
 	
 	@OneToMany(mappedBy = "bookings",cascade = CascadeType.ALL,fetch = FetchType.EAGER)

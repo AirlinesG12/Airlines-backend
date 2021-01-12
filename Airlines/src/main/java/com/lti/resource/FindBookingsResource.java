@@ -1,5 +1,7 @@
 package com.lti.resource;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,16 +13,22 @@ import com.lti.entity.Ticket;
 import com.lti.entity.User;
 import com.lti.service.BookTicketService;
 import com.lti.service.BookingService;
+import com.lti.service.UserService;
 
 @RestController
 @CrossOrigin
-
 public class FindBookingsResource {
 	@Autowired
 	BookTicketService bookingsService;
 	
 	@Autowired
 	BookingService bookings;
+	
+	@Autowired
+	UserService userservice;
+	
+	
+	
 
 
 	@GetMapping(value="/findTicketById")
@@ -39,9 +47,27 @@ public class FindBookingsResource {
 	}
 
 	@GetMapping(value="/findBookingsByUserId")
-		public Bookings findBookingsByUserId(@RequestParam("userId") long userId) {
-		return bookings.findBookingsByBookingId(userId);
+		public List<Bookings> findBookingsByUserId(@RequestParam("userId") long userId) {
+		User user = userservice.findUserById(userId);
+        List<Bookings>bookings=user.getBookings();
+        for(Bookings b : bookings) {
+			System.out.println(b.getBookingId() + " " + b.getTotalFare());
+		}
+        return user.getBookings();  
+	
+	
+	
 	}
+		@GetMapping(value="/findTicketsByBookingId")
+		public List<Ticket> findTicketsByBookingId(@RequestParam("bookingId")long bookingId){
+		Bookings book=bookingsService.findBookingsByBookingId(bookingId);
+		List<Ticket>tickets=book.getTicket();
+		for(Ticket t : tickets) {
+			System.out.println(t.getSource()+""+t.getDestination()+""+t.getSeatNumber());
+		}
+		
+		return book.getTicket();
+		}
 		
 	}	
 	

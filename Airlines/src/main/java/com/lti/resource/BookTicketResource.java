@@ -71,7 +71,7 @@ public class BookTicketResource {
 		}
 		
 		
-		User user=bookingsService.findUserById(10025);
+		User user=bookingsService.findUserById(10007);
 		booking.setTotalFare(totalFare);
 		booking.setPassanger(passangerList);
 		booking.setTicket(ticketList);

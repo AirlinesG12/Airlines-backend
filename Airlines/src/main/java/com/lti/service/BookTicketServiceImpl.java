@@ -40,5 +40,7 @@ public class BookTicketServiceImpl implements BookTicketService {
 public 	Bookings findBookingsByBookingId(long bookingId) {
 		return bookingsRepository.findBookingsByBookingId(bookingId);
 	}
-	
+public Bookings findTicketsByBookingId(long bookingId) {
+	return bookingsRepository.findTicketsByBookingId(bookingId);
+}
 }

@@ -26,4 +26,6 @@ public class BookingServiceImpl implements BookingService {
 		 return bookingsRepository.findBookingsByUserId(userId);
 	 }
 	
+
+	
 }
