@@ -49,4 +49,8 @@ public class BookTicketRepositoryImpl implements BookTicketRepository {
 		List<Flight> flights=query.getResultList();
 		return flights;
 	}
+	
+	public Bookings findBookingsByBookingId(long bookingId) {
+		return em.find(Bookings.class,bookingId);
+	}
 }

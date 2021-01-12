@@ -31,4 +31,5 @@ public class BookingRepositoryImpl implements BookingRepository {
 		return em.find(Bookings.class, userId);
 	}
 	
+
 }

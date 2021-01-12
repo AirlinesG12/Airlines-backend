@@ -37,5 +37,8 @@ public class BookTicketServiceImpl implements BookTicketService {
 	public List<Flight> searchFlight(LocalDate departureDate,String source,String Destination) {
 		return bookingsRepository.searchFlight(departureDate, source, Destination);
 	}
-
+public 	Bookings findBookingsByBookingId(long bookingId) {
+		return bookingsRepository.findBookingsByBookingId(bookingId);
+	}
+	
 }
