@@ -32,11 +32,7 @@ public class BookTicketRepositoryImpl implements BookTicketRepository {
 		return em.find(Flight.class, flightId);
 	}
 	
-	public Ticket findTicketById(long ticketId) {
-		return em.find(Ticket.class, ticketId);
-	}
-
-	@Transactional
+		@Transactional
 	public long bookATicket(Bookings booking) {
 		return em.merge(booking).getBookingId();
 	}
@@ -49,6 +45,16 @@ public class BookTicketRepositoryImpl implements BookTicketRepository {
 		List<Flight> flights=query.getResultList();
 		return flights;
 	}
+
+	
+	public Bookings findBookingsByBookingId(long bookingId) {
+		return em.find(Bookings.class,bookingId);
+	}
+
+	public Bookings findTicketsByBookingId(long bookingId) {
+		return em.find(Bookings.class,bookingId);
+	}
+
 	@Override
 	public long numberOfSeatsAvailable(LocalDate travelDate, long flightId) {
 		long count;
@@ -77,5 +83,15 @@ public class BookTicketRepositoryImpl implements BookTicketRepository {
 		query.setParameter("tdate", travelDate);
 		query.setParameter("fid", flightId);
 		return query.getResultList();
+	
+
+
 	}
-}
+	@Override
+	public Bookings findTicketById(long ticketId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	}

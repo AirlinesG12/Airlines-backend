@@ -18,5 +18,7 @@ public interface BookTicketService {
 	long numberOfSeatsAvailable(LocalDate travelDate,long flightId);
 	long checkSeat(LocalDate travelDate,long flightId,long seatNo);
 	List<Long>seatsNotAvailable(LocalDate travelDate,long flightId);
+	List<Flight>searchFlight(LocalDate departureDate, String source, String Destination);
 
+	
 }

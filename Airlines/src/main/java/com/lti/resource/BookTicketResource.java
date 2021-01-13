@@ -7,10 +7,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.dto.BookDto;
@@ -73,16 +75,17 @@ public class BookTicketResource {
 				
 			ticketList.add(ticket);
 			passangerList.add(passanger);
-			
-		}
 		}
 		
-		User user=bookingsService.findUserById(10030);
+		
+		User user=bookingsService.findUserById(10009);
+		
 		booking.setTotalFare(totalFare);
 		booking.setPassanger(passangerList);
 		booking.setTicket(ticketList);
 		booking.setUser(user);
 		bookingsService.bookATicket(booking);
+		}
 		return booking.getBookingId();
 	}
 	
@@ -116,5 +119,8 @@ public class BookTicketResource {
 		List<Long>seats=bookingsService.seatsNotAvailable(LocalDate.parse(travelDate,formatter), flightId);
 		return seats;
 	}
+
+
 	
+
 }
