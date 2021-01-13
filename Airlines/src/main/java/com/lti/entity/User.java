@@ -1,6 +1,7 @@
 package com.lti.entity;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
+
 @Table(name = "tbl_user9")
+
 public class User {
 
 	@Id
