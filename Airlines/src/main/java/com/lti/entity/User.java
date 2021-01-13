@@ -3,6 +3,7 @@ package com.lti.entity;
 import java.time.LocalDate;
 
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "tbl_user")
+@Table(name = "tbl_user1")
 public class User {
 
 	@Id

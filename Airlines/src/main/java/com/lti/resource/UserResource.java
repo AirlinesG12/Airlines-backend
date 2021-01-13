@@ -42,14 +42,22 @@ public class UserResource {
 	}
 	
 	@RequestMapping(value = "/validUser/{userEmail}/{userPassword}" )
-	public String validUser(@PathVariable("userEmail") String userEmail,@PathVariable("userPassword") String userPassword) {
-		if(userService.isValidUser(userEmail,userPassword))
-		{
-			return "Valid User";
-		}
-		else return "Invalid User";
+	public boolean validUser(@PathVariable("userEmail") String userEmail,@PathVariable("userPassword") String userPassword) {
+		return userService.isValidUser(userEmail,userPassword);
 	}
+//	@RequestMapping(value = "/validUser/{userEmail}/{userPassword}" )
+//	public User validUser(@PathVariable("userEmail") String userEmail,@PathVariable("userPassword") String userPassword) {
+//		return userService.isValidUser(userEmail,userPassword);
+//	}
 	
+	@RequestMapping(value = "/findUserNameByEmailId/{userEmail}" )
+	public String findUserNameByEmailId(@PathVariable("userEmail") String userEmail) {
+		return userService.findUserNameByEmailId(userEmail);
+	}
+	@RequestMapping(value = "/resetPassword/{userEmail}/{userPassword}" )
+	public String resetPassword(@PathVariable("userEmail") String userEmail,@PathVariable("userPassword") String userPassword) {
+		return userService.resetPassword(userEmail,userPassword);
+	}
 	
 	
 }

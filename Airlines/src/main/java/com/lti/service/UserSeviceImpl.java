@@ -30,6 +30,15 @@ public class UserSeviceImpl implements UserService {
 	public boolean isValidUser(String userEmail, String userPassword) {
 		return userRepository.isValidUser(userEmail, userPassword);
 	}
+//	public User isValidUser(String userEmail, String userPassword) {
+//		return userRepository.isValidUser(userEmail, userPassword);
+//	}
+	public String findUserNameByEmailId(String userEmail) {
+		return userRepository.findUserNameByEmailId(userEmail);
+	}
+	public String resetPassword(String userEmail,String userPassword) {
+		return userRepository.resetPassword(userEmail, userPassword);
+	}
 
 
 }
