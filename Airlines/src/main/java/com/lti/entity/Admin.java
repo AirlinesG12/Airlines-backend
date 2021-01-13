@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbl_admin")
+@Table(name="tbl_admin9")
 public class Admin {
 
 	@Id

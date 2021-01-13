@@ -1,5 +1,7 @@
 package com.lti.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +13,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "tbl_ticket3")
+@Table(name = "tbl_ticket9")
 public class Ticket {
 
 	@Id
@@ -24,19 +28,28 @@ public class Ticket {
 	double fare;
 	long seatNumber;
 	String ticketStatus;
+	LocalDate travelDate;
+	long userId;
 	
+	
+
 	@OneToOne
 	@JoinColumn(name = "passangerId")
+	@JsonIgnore
 	Passanger passanger;
 	
 	@ManyToOne()
+	@JsonIgnore
 	@JoinColumn(name="bookingId")
 	Bookings bookings;
+	
+	
 	
 	/*@OneToOne(mappedBy = "ticket",cascade = CascadeType.ALL)
 	Cancellation cancellation;*/
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "flightId")
 	Flight flight;
 
@@ -104,7 +117,13 @@ public class Ticket {
 		this.cancellation = cancellation;
 	}*/
 
-	
+	public String getTicketStatus() {
+		return ticketStatus;
+	}
+
+	public void setTicketStatus(String ticketStatus) {
+		this.ticketStatus = ticketStatus;
+	}
 	
 	public Flight getFlight() {
 		return flight;
@@ -113,12 +132,35 @@ public class Ticket {
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
+	
+	
+
+	
+
+	public LocalDate getTravelDate() {
+		return travelDate;
+	}
+
+	public void setTravelDate(LocalDate travelDate) {
+		this.travelDate = travelDate;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", source=" + source + ", destination=" + destination + ", fare=" + fare
-				+ ", seatNumber=" + seatNumber + "]";
+				+ ", seatNumber=" + seatNumber + ", ticketStatus=" + ticketStatus + ", userId=" + userId + "]";
 	}
+
+	
+
 	
 	
 }

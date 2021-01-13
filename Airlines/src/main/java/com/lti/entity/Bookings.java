@@ -15,10 +15,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
-@Table(name = "tbl_bookings")
+@Table(name = "tbl_bookings9")
 public class Bookings {
 
 	@Id
@@ -35,6 +37,7 @@ public class Bookings {
 	List<Passanger>passanger;
 	
 	@OneToMany(mappedBy = "bookings",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JsonIgnore
 	List<Ticket>ticket;
 	
 	/*@OneToOne
