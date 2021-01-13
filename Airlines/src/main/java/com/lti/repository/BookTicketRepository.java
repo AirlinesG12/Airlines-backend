@@ -10,10 +10,12 @@ import com.lti.entity.User;
 
 public interface BookTicketRepository {
 	User findUserById(long userId);
-	Ticket findTicketById(long ticketId);
+	Bookings findTicketById(long ticketId);
 	Flight findFlightById(long flightId);
 	long bookATicket(Bookings booking);
-	List<Flight> searchFlight(LocalDate departureDate,String source,String Destination);
-	Bookings findBookingsByBookingId(long bookingId);
-	 Bookings findTicketsByBookingId(long bookingId);
+	List<Flight> searchFlight(String source,String Destination);
+	long numberOfSeatsAvailable(LocalDate travelDate,long flightId);
+	long checkSeat(LocalDate travelDate,long flightId,long seatNo);
+	List<Long>seatsNotAvailable(LocalDate travelDate,long flightId);
+
 }

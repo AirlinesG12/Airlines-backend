@@ -19,27 +19,29 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tbl_flight3")
+@Table(name = "tbl_flight9")
 public class Flight {
 
 	@Id
-	@SequenceGenerator(name = "seq_flight",initialValue = 40001,allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_flight")
+	@SequenceGenerator(name = "seq_flight", initialValue = 40001, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_flight")
 	long flightId;
 	String source;
 	String destination;
 	long noOfSeats;
-	LocalDate departureDate;
+	// LocalDate departureDate;
 	LocalTime departureTime;
-	
-	/*@OneToOne(mappedBy = "flight")
-	Bookings bookings;*/
-	
-	
-	/*@ManyToOne
-	@JoinColumn(name = "adminId")
-	Admin admin;*/
-	
+
+	/*
+	 * @OneToOne(mappedBy = "flight") Bookings bookings;
+	 */
+
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "adminId") Admin admin;
+	 */
+
 	@OneToMany(mappedBy = "flight")
 	@JsonIgnore
 	List<Ticket> tickets;
@@ -76,34 +78,25 @@ public class Flight {
 		this.noOfSeats = noOfSeats;
 	}
 
-	public LocalDate getDepartureDate() {
-		return departureDate;
-	}
+	/*
+	 * public LocalDate getDepartureDate() { return departureDate; }
+	 * 
+	 * public void setDepartureDate(LocalDate departureDate) { this.departureDate =
+	 * departureDate; }
+	 */
 
-	public void setDepartureDate(LocalDate departureDate) {
-		this.departureDate = departureDate;
-	}
-	
-	
+	/*
+	 * public Bookings getBookings() { return bookings; }
+	 * 
+	 * public void setBookings(Bookings bookings) { this.bookings = bookings; }
+	 */
 
-	/*public Bookings getBookings() {
-		return bookings;
-	}
+	/*
+	 * public Admin getAdmin() { return admin; }
+	 * 
+	 * public void setAdmin(Admin admin) { this.admin = admin; }
+	 */
 
-	public void setBookings(Bookings bookings) {
-		this.bookings = bookings;
-	}*/
-
-	/*public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}*/
-
-	
-	
 	public LocalTime getDepartureTime() {
 		return departureTime;
 	}
@@ -115,7 +108,7 @@ public class Flight {
 	@Override
 	public String toString() {
 		return "Flight [flightId=" + flightId + ", source=" + source + ", destination=" + destination + ", noOfSeats="
-				+ noOfSeats + ", departureDate=" + departureDate + ", departureTime=" + departureTime + "]";
+				+ noOfSeats + ", departureTime=" + departureTime + "]";
 	}
 
 	public List<Ticket> getTickets() {
@@ -126,8 +119,4 @@ public class Flight {
 		this.tickets = tickets;
 	}
 
-	
-	
-	
-	
 }

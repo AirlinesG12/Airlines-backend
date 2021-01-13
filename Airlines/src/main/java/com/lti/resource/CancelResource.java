@@ -47,7 +47,7 @@ public class CancelResource {
 		int minDiff=(dMin-cMin);
 		int totalTimeDiff=(hourDiff * 60) + minDiff;
 		//System.out.println(totalTimeDiff);
-		if(ticket.getFlight().getDepartureDate()==LocalDate.now() && totalTimeDiff<180 ) {
+		if(ticket.getTravelDate()==LocalDate.now() && totalTimeDiff<180 ) {
 			cancelCharge=ticket.getFare()*0.5;
 		}
 		else

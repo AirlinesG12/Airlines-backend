@@ -17,7 +17,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name = "tbl_user3")
+@Table(name = "tbl_user9")
 public class User {
 
 	@Id

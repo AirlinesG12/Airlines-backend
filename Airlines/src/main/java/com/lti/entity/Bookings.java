@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name = "tbl_bookings3")
+@Table(name = "tbl_bookings9")
 public class Bookings {
 
 	@Id
