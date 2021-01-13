@@ -34,8 +34,23 @@ public class BookTicketServiceImpl implements BookTicketService {
 		return bookingsRepository.findTicketById(ticketId);
 	}
 	
-	public List<Flight> searchFlight(LocalDate departureDate,String source,String Destination) {
-		return bookingsRepository.searchFlight(departureDate, source, Destination);
+	public List<Flight> searchFlight(String source,String Destination) {
+		return bookingsRepository.searchFlight(source, Destination);
+	}
+
+	@Override
+	public long numberOfSeatsAvailable(LocalDate travelDate, long flightId) {
+		return bookingsRepository.numberOfSeatsAvailable(travelDate, flightId);
+	}
+
+	@Override
+	public long checkSeat(LocalDate travelDate, long flightId, long seatNo) {
+		return bookingsRepository.checkSeat(travelDate, flightId, seatNo);
+	}
+
+	@Override
+	public List<Long> seatsNotAvailable(LocalDate travelDate, long flightId) {
+		return bookingsRepository.seatsNotAvailable(travelDate, flightId);
 	}
 
 }
