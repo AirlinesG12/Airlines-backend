@@ -1,5 +1,7 @@
 package com.lti.dto;
 
+import java.time.LocalDate;
+
 public class BookDto {
 
 	long seatNumber;
@@ -11,6 +13,7 @@ public class BookDto {
 	long passangerId;
 	long bookingId;
 	long userId;
+	LocalDate travelDate;
 	
 	String passangerName;
 	String passangerMobile;
@@ -93,6 +96,12 @@ public class BookDto {
 	}
 	public void setPassangerAddress(String passangerAddress) {
 		this.passangerAddress = passangerAddress;
+	}
+	public LocalDate getTravelDate() {
+		return travelDate;
+	}
+	public void setTravelDate(LocalDate travelDate) {
+		this.travelDate = travelDate;
 	}
 	
 	

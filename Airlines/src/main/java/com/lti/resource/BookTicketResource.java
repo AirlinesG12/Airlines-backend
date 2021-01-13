@@ -36,8 +36,14 @@ public class BookTicketResource {
 		List<Ticket>ticketList = new ArrayList<Ticket>();
 		long id;
 		for(BookDto dto : dtoList) {
+			long seatNumber=dto.getSeatNumber();
+			long flightId=dto.getFlightId();
+			LocalDate travelDate=dto.getTravelDate();
+			if(bookingsService.checkSeat(travelDate, flightId, seatNumber)==0) {
+				
+			
 			id=dto.getUserId();
-			User user=bookingsService.findUserById(dto.getUserId());
+			//User user=bookingsService.findUserById(dto.getUserId());
 			Flight flight;
 			flight = bookingsService.findFlightById(dto.getFlightId());
 			
@@ -51,6 +57,7 @@ public class BookTicketResource {
 			ticket.setPassanger(passanger);
 			ticket.setBookings(booking);
 			ticket.setUserId(dto.getUserId());
+			ticket.setTravelDate(dto.getTravelDate());
 			ticket.setTicketStatus("Booked");
 			
 			
@@ -66,10 +73,11 @@ public class BookTicketResource {
 				
 			ticketList.add(ticket);
 			passangerList.add(passanger);
+			
+		}
 		}
 		
-		
-		User user=bookingsService.findUserById(10025);
+		User user=bookingsService.findUserById(10030);
 		booking.setTotalFare(totalFare);
 		booking.setPassanger(passangerList);
 		booking.setTicket(ticketList);
@@ -78,10 +86,35 @@ public class BookTicketResource {
 		return booking.getBookingId();
 	}
 	
-	@RequestMapping("searchflight/{fdate}/{sou}/{dest}")
-	public List<Flight> searchFlight(@PathVariable("fdate") String date,@PathVariable("sou") String source,@PathVariable("dest") String destination) {
-		DateTimeFormatter formatter= DateTimeFormatter.ofPattern("MM-dd-yyyy");
-		List<Flight> flights=bookingsService.searchFlight(LocalDate.parse(date,formatter), source, destination);
+	@RequestMapping("searchflight/{sou}/{dest}")
+	public List<Flight> searchFlight(@PathVariable("sou") String source,@PathVariable("dest") String destination) {
+		//DateTimeFormatter formatter= DateTimeFormatter.ofPattern("MM-dd-yyyy");
+		List<Flight> flights=bookingsService.searchFlight(source, destination);
 		return flights;
 	}
+	
+	@RequestMapping("checkSeat/{fid}/{seatNo}/{tdate}")
+	public boolean checkSeat(@PathVariable("fid") long flightId,@PathVariable("seatNo") long seatNo,@PathVariable("tdate") String travelDate ) {
+		DateTimeFormatter formatter= DateTimeFormatter.ofPattern("MM-dd-yyyy");
+		long number=bookingsService.checkSeat(LocalDate.parse(travelDate,formatter), flightId, seatNo);
+		if(number==0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@RequestMapping("seatAvailable/{tdate}/{fid}")
+	public long seatAvailable(@PathVariable("fid") long flightId,@PathVariable("tdate") String travelDate ) {
+		DateTimeFormatter formatter= DateTimeFormatter.ofPattern("MM-dd-yyyy");
+		long number=bookingsService.numberOfSeatsAvailable(LocalDate.parse(travelDate,formatter), flightId);
+		return number;
+	}
+	
+	@RequestMapping("seatsUnavailable/{tdate}/{fid}")
+	public List<Long> seatsNotAvailable(@PathVariable("fid") long flightId,@PathVariable("tdate") String travelDate ) {
+		DateTimeFormatter formatter= DateTimeFormatter.ofPattern("MM-dd-yyyy");
+		List<Long>seats=bookingsService.seatsNotAvailable(LocalDate.parse(travelDate,formatter), flightId);
+		return seats;
+	}
+	
 }
