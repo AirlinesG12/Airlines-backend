@@ -41,7 +41,7 @@ public class BookTicketResource {
 			long seatNumber=dto.getSeatNumber();
 			long flightId=dto.getFlightId();
 			LocalDate travelDate=dto.getTravelDate();
-			if(bookingsService.checkSeat(travelDate, flightId, seatNumber)==0) {
+			
 				
 			
 			id=dto.getUserId();
@@ -78,14 +78,14 @@ public class BookTicketResource {
 		}
 		
 		
-		User user=bookingsService.findUserById(10009);
+		User user=bookingsService.findUserById(10030);
 		
 		booking.setTotalFare(totalFare);
 		booking.setPassanger(passangerList);
 		booking.setTicket(ticketList);
 		booking.setUser(user);
 		bookingsService.bookATicket(booking);
-		}
+		
 		return booking.getBookingId();
 	}
 	

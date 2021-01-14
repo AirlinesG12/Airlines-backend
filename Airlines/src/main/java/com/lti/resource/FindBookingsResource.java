@@ -60,10 +60,11 @@ public class FindBookingsResource {
 			System.out.println(b.getBookingId() + " " + b.getTotalFare());
 		}
         return user.getBookings();  
-	
-	
-	
 	}
+	
+	
+	
+	
 		@GetMapping(value="/findTicketsByBookingId")
 		public List<Ticket> findTicketsByBookingId(@RequestParam("bookingId")long bookingId){
 		Bookings books=book.findBookingsByBookingId(bookingId);
@@ -71,6 +72,8 @@ public class FindBookingsResource {
 		for(Ticket t : tickets) {
 			System.out.println(t.getSource()+""+t.getDestination()+""+t.getSeatNumber());
 		}
+		
+		
 		
 		return books.getTicket();
 		}
