@@ -2,8 +2,11 @@ package com.lti.repository;
 
 import java.util.List;
 
-import javax.management.Query;
+import javax.persistence.Query;
+
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -17,6 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@PersistenceContext
 	EntityManager em;
+	
 	
 	@Transactional
 	public long addAUser(User user) {
@@ -70,14 +74,44 @@ public class UserRepositoryImpl implements UserRepository {
 		
 	}
 	
-	public String resetPassword(String userEmail,String userPassword) {
-		String jpql = "Update User u set  u.userPassword=:newpass where userEmail=:umail";
+	public long findUserIdByEmailId(String userEmail) {
+		String jpql = "select u from User u where u.userEmail=:umail";
 		TypedQuery<User> query = em.createQuery(jpql, User.class);     
 		query.setParameter("umail", userEmail);
-		query.setParameter("newpass", userPassword);
 		User user = query.getSingleResult();
-		return user.getUserPassword();
+		return user.getUserId();
 
 		
 	}
+	@Transactional
+	public boolean resetPassword(String userEmail,String userPassword) {
+		String jpql = "Update User u set  u.userPassword=:newpass where userEmail=:umail";
+		Query query = em.createQuery(jpql);   
+		query.setParameter("umail", userEmail);
+		query.setParameter("newpass", userPassword);
+		int result=query.executeUpdate();
+		if (result>0)
+		return true;
+		else
+			return false;	
+	}
+	
+	public boolean checkEmail(String userEmail) {
+		try {
+		String jpql = "select u from User u where u.userEmail=:umail";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);  
+		query.setParameter("umail", userEmail);
+		User user = query.getSingleResult();
+		
+		if (user != null) {
+			return true;
+		}
+		}catch(Exception e)
+		{
+		  return false;
+		}
+		return false;
+	}
+ 
+
 }

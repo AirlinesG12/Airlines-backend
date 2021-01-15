@@ -12,5 +12,7 @@ public interface UserRepository {
 	boolean isValidUser(String userEmail,String userPassword);
 //	User isValidUser(String userEmail,String userPassword);
 	String findUserNameByEmailId(String userEmail);
-	String resetPassword(String userEmail,String userPassword);
+	boolean resetPassword(String userEmail,String userPassword);
+	public long findUserIdByEmailId(String userEmail);
+	public boolean checkEmail(String userEmail);
 }

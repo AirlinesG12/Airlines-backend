@@ -54,10 +54,18 @@ public class UserResource {
 	public String findUserNameByEmailId(@PathVariable("userEmail") String userEmail) {
 		return userService.findUserNameByEmailId(userEmail);
 	}
+	@RequestMapping(value = "/findUserIdByEmailId/{userEmail}" )
+	public long findUserIdByEmailId(@PathVariable("userEmail") String userEmail) {
+		return userService.findUserIdByEmailId(userEmail);
+	}
 	@RequestMapping(value = "/resetPassword/{userEmail}/{userPassword}" )
-	public String resetPassword(@PathVariable("userEmail") String userEmail,@PathVariable("userPassword") String userPassword) {
+	public boolean resetPassword(@PathVariable("userEmail") String userEmail,@PathVariable("userPassword") String userPassword) {
 		return userService.resetPassword(userEmail,userPassword);
 	}
 	
+	@RequestMapping(value = "/findEmail/{userEmail}" )
+	public boolean checkEmail(@PathVariable("userEmail") String userEmail) {
+		return userService.checkEmail(userEmail);
+	}
 	
 }
