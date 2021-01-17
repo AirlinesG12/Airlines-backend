@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,12 +57,23 @@ public class FindBookingsResource {
 	@GetMapping(value="/findBookingsByUserId")
 		public List<Bookings> findBookingsByUserId(@RequestParam("userId") long userId) {
 		User user = userservice.findUserById(userId);
-        List<Bookings>bookings=user.getBookings();
-        for(Bookings b : bookings) {
+        //List<Bookings>bookings=user.getBookings();
+        /*for(Bookings b : bookings) {
 			System.out.println(b.getBookingId() + " " + b.getTotalFare());
-		}
-        return user.getBookings();  
+		}*/
+        
+        return bookings.getBookingsByUserId(userId);
 	}
+	
+	@RequestMapping(value="/findBookingsByUserId/{uid}")
+	public List<Bookings> findBookingByUserId(@PathVariable("uid") long userId) {
+	User user = userservice.findUserById(userId);
+    List<Bookings>bookings=user.getBookings();
+    /*for(Bookings b : bookings) {
+		System.out.println(b.getBookingId() + " " + b.getTotalFare());
+	}*/
+    return user.getBookings();  
+}
 	
 	
 	
@@ -73,10 +86,21 @@ public class FindBookingsResource {
 			System.out.println(t.getSource()+""+t.getDestination()+""+t.getSeatNumber());
 		}
 		
+		return books.getTicket();
+		}
 		
+		@RequestMapping(value="/findTicketsByBookingId/{bid}")
+		public List<Ticket> findTicketByBookingId(@PathVariable("bid")long bookingId){
+		Bookings books=book.findBookingsByBookingId(bookingId);
+		List<Ticket>tickets=books.getTicket();		
+		/*for(Ticket t : tickets) {
+			System.out.println(t.getSource()+""+t.getDestination()+""+t.getSeatNumber());
+		}*/
 		
 		return books.getTicket();
 		}
+
+		
 		@GetMapping(value="/findPassangerByBookingId")
 		public List<Passanger> findPassangerByBookingId(@RequestParam("bookingId")long bookingId){
 			Bookings books=book.findBookingsByBookingId(bookingId);
@@ -86,6 +110,8 @@ public class FindBookingsResource {
 			}
 				return books.getPassanger();
 		}
+		
+		
 		
 
 }	
