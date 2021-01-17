@@ -19,7 +19,7 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 
-@Table(name = "tbl_user1")
+@Table(name = "tbl_user9")
 
 public class User {
 

@@ -30,8 +30,8 @@ public class BookTicketResource {
 	@Autowired
 	BookTicketService bookingsService;
 	
-	@RequestMapping(value="bookATicket",method = RequestMethod.POST)
-	public long bookATicket(@RequestBody List<BookDto> dtoList){
+	@RequestMapping(value="bookATicket/{uid}",method = RequestMethod.POST)
+	public long bookATicket(@RequestBody List<BookDto> dtoList,@PathVariable("uid") long userId){
 		double totalFare=0.0;
 		Bookings booking= new Bookings();
 		List<Passanger>passangerList= new ArrayList<Passanger>();
@@ -78,7 +78,7 @@ public class BookTicketResource {
 		}
 		
 		
-		User user=bookingsService.findUserById(10030);
+		User user=bookingsService.findUserById(userId);
 		
 		booking.setTotalFare(totalFare);
 		booking.setPassanger(passangerList);

@@ -24,7 +24,7 @@ public class CancelResource {
 	
 	
 	@RequestMapping(value="/cancelTicket/{tId}")
-	public String cancelTicket(@PathVariable("tId") long ticketId) {
+	public double cancelTicket(@PathVariable("tId") long ticketId) {
 		//long ticketId=7034;
 		double cancelCharge;
 		Ticket ticket=cancelService.findTicketById(ticketId);
@@ -32,12 +32,13 @@ public class CancelResource {
 		String cancelled="Cancelled";
 		//System.out.println(status);
 		if(status.equals(cancelled)) {
-			return "already cancelled";
+			return 1;
 		}
 		else {
 		//System.out.println(ticket.getFlight().getDepartureTime());
 		LocalTime dTime=ticket.getFlight().getDepartureTime();
 		LocalTime cTime=LocalTime.now();
+		System.out.println(LocalTime.now());
 		int dHour=dTime.getHour();
 		int dMin=dTime.getMinute();
 		int cHour=cTime.getHour();
@@ -48,13 +49,16 @@ public class CancelResource {
 		int totalTimeDiff=(hourDiff * 60) + minDiff;
 		//System.out.println(totalTimeDiff);
 		if(ticket.getTravelDate()==LocalDate.now() && totalTimeDiff<180 ) {
-			cancelCharge=ticket.getFare()*0.5;
+			//cancelCharge=ticket.getFare()*0.5;
+			return 0;
 		}
 		else
 		{
-			cancelCharge=ticket.getFare()*0.2;
+			cancelCharge=ticket.getFare()*0.3;
+			cancelService.cancelTicket(ticketId,cancelCharge);
 		}
-		return"Ticket Id " + cancelService.cancelTicket(ticketId,cancelCharge).getTicketId() + " has been successfully cancelled" + "Cancellation Charges :"+ cancelCharge;
+		//cancelService.cancelTicket(ticketId,cancelCharge);
+		return cancelCharge;
 		}
 	}
 	
